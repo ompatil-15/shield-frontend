@@ -10,9 +10,13 @@ const AddNote = ({ setAddNewNote }) => {
     const textareaRef = useRef(null);
     const [newTitle, setNewTitle] = useState('');
     const [newContent, setNewContent] = useState('');
+    const [submitting, setSubmitting] = useState(false); 
     const [addNote] = useAddNoteMutation();
 
     const handleEncryptAndSubmit = async () => {
+        if (submitting) return;  
+        setSubmitting(true);  
+
         try {
             const titleBase64 = Uint8ArrayToBase64(new TextEncoder().encode(newTitle));
             const contentBase64 = Uint8ArrayToBase64(new TextEncoder().encode(newContent));
@@ -32,13 +36,15 @@ const AddNote = ({ setAddNewNote }) => {
             console.error("Failed to encrypt or add note", error);
             toast.error(error?.data?.message || "Failed to add note", { position: 'bottom-left' });
             setAddNewNote(false);
+        } finally {
+            setSubmitting(false); 
         }
     };
 
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (formRef.current && !formRef.current.contains(event.target)) {
-                if (newTitle.trim()) {
+                if (newTitle.trim() && !submitting) {  
                     handleEncryptAndSubmit();
                 } else {
                     setAddNewNote(false);
@@ -51,7 +57,7 @@ const AddNote = ({ setAddNewNote }) => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [newTitle, newContent, encryptionKey, IV]);
+    }, [newTitle, newContent, encryptionKey, IV, submitting]);
 
     const handleChange = (event) => {
         const textarea = textareaRef.current;
@@ -105,6 +111,7 @@ const AddNote = ({ setAddNewNote }) => {
                         type="button"
                         className="font-semibold text-sm border-2 bg-violet-800 border-violet-800 px-4 py-1 rounded-full"
                         onClick={() => setAddNewNote(false)}
+                        disabled={submitting}  
                     >
                         Cancel
                     </button>
