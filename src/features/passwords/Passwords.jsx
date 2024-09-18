@@ -9,8 +9,8 @@ import Premium from '../../components/premium'
 import useAuth from "../../hooks/useAuth";
 
 const Passwords = () => {
-    const limit = 15;
-    const { id, encryptionKey, IV } = useAuth();
+    const { id, encryptionKey, IV, premium } = useAuth();
+    const limit = premium ? Number.POSITIVE_INFINITY: 15;
     const [searchPassword, setSearchPassword] = useState("");
     const [addNewPassword, setAddNewPassword] = useState(false);
     const [decryptedWebsites, setDecryptedWebsites] = useState([]);

@@ -10,7 +10,7 @@ const authSlice = createSlice({
         token: null,
         encryptionKey: null, 
         IV: null, 
-        passwords: []
+        premium: null
     },
     reducers: {
         setCredentials: (state, action) => {
@@ -19,13 +19,14 @@ const authSlice = createSlice({
 
             if (state.token) {
                 const decoded = jwtDecode(state.token)
-                const { id, email, encryptedPackage } = decoded.UserInfo
+                const { id, email, premium, encryptedPackage } = decoded.UserInfo
                 const encryptedPackageBytes = Base64ToUint8Array(encryptedPackage);
                 const IVBytes = encryptedPackageBytes.slice(16, 16 + 12);
                 state.id = id
                 state.email = email
                 state.encryptionKey = encryptionKey
                 state.IV = Uint8ArrayToBase64(IVBytes)
+                state.premium = premium
             }
         },
         logOut: (state, action) => {
@@ -34,6 +35,7 @@ const authSlice = createSlice({
             state.IV =  null
             state.id = null
             state.email = null
+            state.premium = null
         }
     }
 })
@@ -47,4 +49,5 @@ export const selectCurrentId = (state) => state.auth.id;
 export const selectCurrentEmail = (state) => state.auth.email;
 export const selectCurrentEncryptionKey = (state) => state.auth.encryptionKey;
 export const selectCurrentIV = (state) => state.auth.IV;
+export const selectCurrentPremium = (state) => state.auth.premium;
   

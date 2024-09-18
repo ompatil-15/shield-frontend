@@ -9,8 +9,8 @@ import Premium from "../../components/premium";
 import useAuth from "../../hooks/useAuth";
 
 const Notes = () => {
-    const { id, encryptionKey, IV } = useAuth();
-    const limit = 15;
+    const { id, encryptionKey, IV, premium } = useAuth();
+    const limit = premium ? Number.POSITIVE_INFINITY: 15;
     const [addNewNote, setAddNewNote] = useState(false);
     const [searchNote, setSearchNote] = useState("");
     const [decryptedNotes, setDecryptedNotes] = useState([]);

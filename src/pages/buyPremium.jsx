@@ -1,4 +1,6 @@
 import { CheckIcon } from '@heroicons/react/20/solid'
+import useAuth from '../hooks/useAuth'
+import { Link } from 'react-router-dom';
 
 const includedFeatures = [
   'Unlimited password storage',
@@ -8,8 +10,13 @@ const includedFeatures = [
 ]
 
 export default function BuyPremium() {
+  const { id } = useAuth();
+  if (!id) {
+    alert("Please login before buying premium");
+    window.location.href = '/';
+  }
   return (
-    <div className="bg-black py-24 sm:py-12 w-screen h-screen">
+    <div className="bg-black py-24 sm:py-12 w-screen min-h-screen">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl sm:text-center">
           <div className="md:py-2 text-3xl font-bold tracking-tight bg-gradient-to-r from-purple-500 via-pink-600 to-red-600 bg-clip-text text-transparent sm:text-5xl">Get everything, forever.</div>
@@ -43,15 +50,14 @@ export default function BuyPremium() {
               <div className="mx-auto max-w-xs px-8">
                 <p className="text-base font-semibold ">Pay once, use it forever</p>
                 <p className="mt-6 flex items-baseline justify-center gap-x-2">
-                  <span className="text-5xl font-bold tracking-tight">₹1499</span>
+                  <span className="text-5xl font-bold tracking-tight">₹199</span>
                   <span className="text-sm font-semibold leading-6 tracking-wide">INR</span>
                 </p>
-                <a
-                  href="/payment"
+                <Link to={`http://localhost:5000/payment/${id}`}
                   className="mt-10 block w-full rounded-md bg-violet-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-violet-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700"
                 >
                   Get premium
-                </a>
+                </Link>
                 <p className="mt-6 text-xs leading-5 text-zinc-400">
                   Invoices and receipts available for easy company reimbursement
                 </p>

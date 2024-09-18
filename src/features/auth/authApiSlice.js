@@ -65,6 +65,9 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 body: { email }
             }),
         }),
+        getPaymentStatus: builder.query({
+            query: (merchantTransactionId) => `/payment/redirect/${merchantTransactionId}`,
+        }),
     })
 })
 
@@ -73,5 +76,6 @@ export const {
     useSendLogoutMutation,
     useRefreshMutation,
     useAddNewUserMutation,
-    useGetSaltMutation
+    useGetSaltMutation,
+    useGetPaymentStatusQuery
 } = authApiSlice

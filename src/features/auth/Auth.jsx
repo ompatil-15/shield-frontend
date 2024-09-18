@@ -87,7 +87,7 @@ export default function Auth() {
 
   return (
     <main className="bg-neutral-900 flex min-h-screen flex-col justify-center">
-    <Link to="/"><button className="ml-10 text-sm lg:text-base py-1 px-6 bg-gradient-to-r text-zinc-200 bg-zinc-700 font-semibold rounded-full cursor-pointer">Back</button></Link>
+    <Link to="/"><button className="fixed top-4 left-6 text-sm lg:text-base py-1 px-6 bg-gradient-to-r text-zinc-200 bg-zinc-700 font-semibold rounded-full cursor-pointer">Back</button></Link>
     <div className="px-6 py-8 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img

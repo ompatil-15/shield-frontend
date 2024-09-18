@@ -12,6 +12,7 @@ import PersistLogin from './features/auth/persistLogin';
 import Prefetch from './features/auth/prefetch';
 import Layout from './components/layout';
 import BuyPremium from './pages/buyPremium';
+import PaymentRedirect from './pages/paymentRedirect';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/premium" element={<BuyPremium />} />
+        <Route path="/payment/redirect/:merchantTransactionId" element={<PaymentRedirect />} />
 
         <Route path="/" element={<Layout />} >
           <Route element={<PersistLogin />}>
