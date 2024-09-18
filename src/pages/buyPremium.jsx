@@ -53,7 +53,7 @@ export default function BuyPremium() {
                   <span className="text-5xl font-bold tracking-tight">₹199</span>
                   <span className="text-sm font-semibold leading-6 tracking-wide">INR</span>
                 </p>
-                <Link to={`http://localhost:5000/payment/${id}`}
+                <Link to={`https://ompatil-shield.onrender.com/payment/${id}`}
                   className="mt-10 block w-full rounded-md bg-violet-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-violet-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700"
                 >
                   Get premium
